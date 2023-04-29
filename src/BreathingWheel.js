@@ -3,30 +3,28 @@ import { ProgressBar } from 'react-bootstrap';
 
 function BreathingWheel() {
     const [phase, setPhase] = useState('IN');
-    const [timeRemaining, setTimeRemaining] = useState(getPhaseInterval(phase));
+    const { totalTime, percentIncrement } = getPhaseInterval(phase);
+    const [timeElapsed, setTimeElapsed] = useState(0);
+
+    useEffect(() => {
+        const intervalId = setInterval(() => {
+            setTimeElapsed((prevTime) => prevTime + 100);
+        }, 100);
+
+        return () => clearInterval(intervalId);
+    }, []);
 
     useEffect(() => {
         const phaseInterval = getPhaseInterval(phase);
-
+    
         const timeoutId = setTimeout(() => {
-            const nextPhase = getNextPhase(phase);
-            setPhase(nextPhase);
-            setTimeRemaining(nextPhase);
+          const nextPhase = getNextPhase(phase);
+          setPhase(nextPhase);
+          setTimeElapsed(0);
         }, phaseInterval);
-
-        const intervalId = setInterval(() => {
-            setTimeRemaining(prevTimeRemaining => {
-                const newTimeRemaining = prevTimeRemaining - 1000;
-                if (newTimeRemaining < 0) {
-                    clearTimeout(timeoutId);
-                    clearInterval(intervalId);
-                    return 0;
-                }
-            })
-        }, 1000)
-
+    
         return () => clearTimeout(timeoutId);
-    }, [phase])
+      }, [phase]);
 
     function getNextPhase(currentPhase) {
         switch(currentPhase) {
@@ -44,28 +42,29 @@ function BreathingWheel() {
     function getPhaseInterval(currentPhase) {
         switch(currentPhase) {
             case 'IN':
-                return 4000;
+                return { totalTime: 4000, percentIncrement: 0.0526 } ;
             case 'HOLD':
-                return 7000;
+                return { totalTime: 7000, percentIncrement: 0.0143 };
             case 'OUT':
-                return 8000;
+                return { totalTime: 8000, percentIncrement: 0.0071 };
             default:
-                return 0;
+                return { totalTime: 0, percentIncrement: 0 };
         }
     }
 
-    const progress = ((getPhaseInterval(phase) - timeRemaining) / getPhaseInterval(phase)) * 100;
+    const progress = (timeElapsed / totalTime) * 100;
 
     return (
-        <div style={{ position: 'relative'}}>
-            <ProgressBar
-                now={progress}
-                min={0}
-                max={100}
-            />
-            <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>
-                <h1>{phase}</h1>   
-                <p>{progress}</p>        
+        <div className="breathing-wheel">
+            <div className="progress-wrapper">
+                <ProgressBar
+                    now={progress}
+                    label={`${progress.toFixed(0)}%`}
+                />
+            </div>
+            
+            <div className="phase-wrapper">
+                <h1>{phase}</h1>     
             </div>
         </div>
     );
