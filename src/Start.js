@@ -8,3 +8,5 @@ function Start() {
         </Button>
     )
 }
+
+export default Start;

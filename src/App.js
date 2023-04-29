@@ -1,11 +1,13 @@
 import React from 'react';
-import Start from './Start.js'
 import './App.css';
+
+import Start from './Start.js'
+import BreathingWheel from './BreathingWheel.js';
 
 function App() {
     return (
-        <div className="App">
-            <h1>Hello, world!</h1>
+        <div className="App d-flex justify-content-center align-items-center">
+            <BreathingWheel/>
         </div>
     );
 }
