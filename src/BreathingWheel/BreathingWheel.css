@@ -1,3 +1,41 @@
+html {
+    font-size: 16px; /* 16px = 100% */
+    max-width: 500px;
+    margin: 0 auto;
+    box-sizing: border-box;
+  }
+  
+  .circle {
+    position: relative;
+    width: 20em; /* relative to the font-size */
+    height: 20em; /* relative to the font-size */
+    border-radius: 50%;
+    border: 2px solid black;
+    margin: 2em auto; /* relative to the font-size */
+    box-sizing: border-box;
+  }
+  
+  .dot {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(0deg) translateX(9.9em); /* relative to the font-size */
+    width: 1em; /* relative to the font-size */
+    height: 1em; /* relative to the font-size */
+    border-radius: 50%;
+    background-color: black;
+    animation: move 19s linear infinite;
+  }
+  
+  @keyframes move {
+    0% {
+      transform: translate(-50%, -50%) rotate(0deg) translateX(9.9em); /* relative to the font-size */
+    }
+    100% {
+      transform: translate(-50%, -50%) rotate(360deg) translateX(9.9em); /* relative to the font-size */
+    }
+  }
+
 .text {
     position: absolute;
     top: 50%;
