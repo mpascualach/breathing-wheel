@@ -1,0 +1,17 @@
+$breathingPhases: (
+  inhale: (
+    name: 'inhale',
+    duration: 4,
+    className: 'inhale-phase'
+  ),
+  hold: (
+    name: 'hold',
+    duration: 7,
+    className: 'hold-phase'
+  ),
+  exhale: (
+    name: 'exhale',
+    duration: 8,
+    className: 'exhale-phase'
+  )
+);

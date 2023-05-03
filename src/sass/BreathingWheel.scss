@@ -1,0 +1,105 @@
+html {
+    font-size: 16px; /* 16px = 100% */
+    max-width: 500px;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+    
+.circle {
+    position: relative;
+    width: 20em; /* relative to the font-size */
+    height: 20em; /* relative to the font-size */
+    border-radius: 50%;
+    border: 2px solid black;
+    margin: 2em auto; /* relative to the font-size */
+    transform-origin: center;
+    box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.5);
+    animation: breathe 19s infinite;
+
+    &:before {
+        content: "";
+        position: absolute;
+        top: 2px;
+        left: 2px;
+        bottom: 2px;
+        right: 2px;
+        background-color: #fff;
+        border-radius: 50%;
+        transition: transform 0.5s ease-in-out, box-shadow 0.5s ease-in-out;
+    }
+}
+
+.circle:hover {
+    transform: translateZ(-100px);
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5), 0 0 50px rgba(0, 0, 0, 0.5);
+}
+
+.circle:hover::before {
+    transform: scale(0.95);
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5), 0 0 50px rgba(0, 0, 0, 0.5);
+}
+
+@keyframes breathe {
+    0% {
+        transform: translateZ(0);
+        box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.5);
+      }
+      17.39% {
+        transform: translateZ(-100px);
+        box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5), 0 0 50px rgba(0, 0, 0, 0.5);
+      }
+      34.78% {
+        transform: translateZ(-100px);
+        box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5), 0 0 50px rgba(0, 0, 0, 0.5);
+      }
+      52.17% {
+        transform: translateZ(0);
+        box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5), 0 0 50px rgba(0, 0, 0, 0.5);
+      }
+      65.22% {
+        transform: translateZ(0);
+        box-shadow: outset 0 0 10px rgba(0, 0, 0, 0.5), 0 0 50px rgba(0, 0, 0, 0.5);
+      }
+      78.26% {
+        transform: translateZ(-100px);
+        box-shadow: outset 0 0 10px rgba(0, 0, 0, 0.5), 0 0 50px rgba(0, 0, 0, 0.5);
+      }
+      95.65% {
+        transform: translateZ(-100px);
+        box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5), 0 0 50px rgba(0, 0, 0, 0.5);
+      }
+      100% {
+        transform: translateZ(0);
+        box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.5);
+      }
+    }
+    
+.dot {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-90deg) translateX(9.9em); /* relative to the font-size */
+    width: 1em; /* relative to the font-size */
+    height: 1em; /* relative to the font-size */
+    border-radius: 50%;
+    background-color: black;
+    animation: move 19s linear infinite;
+}
+    
+@keyframes move {
+    0% {
+        transform: translate(-50%, -50%) rotate(270deg) translateX(9.9em); /* relative to the font-size */
+    }
+    100% {
+        transform: translate(-50%, -50%) rotate(630deg) translateX(9.9em); /* relative to the font-size */
+    }
+}
+  
+.text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2em;
+    text-align: center;
+}
